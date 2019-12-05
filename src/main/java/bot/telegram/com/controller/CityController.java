@@ -12,7 +12,7 @@ public class CityController {
     @Autowired
     CityRepository cityRepository;
 
-    @GetMapping()
+    @GetMapping("/qwe")
     public String home() {
         for (City city : cityRepository.findAll()) {
             System.out.println(city.toString());

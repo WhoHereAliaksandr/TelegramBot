@@ -24,12 +24,15 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 public class SpringJdbcConfig {
 
-    @Autowired
-    private Environment env;
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+    @Value("${spring.datasource.url}")
+    private String url;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.password}")
+    private String password;
 
-    public String getConfigValue(String configKey){
-        return env.getProperty(configKey);
-    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -45,10 +48,10 @@ public class SpringJdbcConfig {
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
-        driverManagerDataSource.setDriverClassName(getConfigValue("spring.datasource.driver-class-name"));
-        driverManagerDataSource.setUrl(getConfigValue("spring.datasource.url"));
-        driverManagerDataSource.setUsername(getConfigValue("spring.datasource.username"));
-        driverManagerDataSource.setPassword(getConfigValue("spring.datasource.password"));
+        driverManagerDataSource.setDriverClassName(driverClassName);
+        driverManagerDataSource.setUrl(url);
+        driverManagerDataSource.setUsername(username);
+        driverManagerDataSource.setPassword(password);
         return driverManagerDataSource;
     }
 
