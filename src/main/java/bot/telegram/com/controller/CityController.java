@@ -14,9 +14,7 @@ public class CityController {
 
     @GetMapping("/qwe")
     public String home() {
-        for (City city : cityRepository.findAll()) {
-            System.out.println(city.toString());
-        }
+        System.out.println("qwe");
         return "Hello World!";
     }
 
