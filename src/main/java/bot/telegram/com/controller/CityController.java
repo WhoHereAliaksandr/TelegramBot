@@ -13,17 +13,18 @@ public class CityController {
     CityService cityService;
 
     @PostMapping("/create")
-    public ResponseEntity create(String name, String description) {
-        return ResponseEntity.ok(cityService.createCity(new City(name, description)));
+    public ResponseEntity create(@RequestBody City city) {
+        System.out.println(city.toString());
+        return ResponseEntity.ok(cityService.createCity(city));
     }
 
-    @PutMapping("/update")
-    public ResponseEntity update(String name, String description) {
+    @PutMapping("/update/{name}")
+    public ResponseEntity update(@PathVariable String name, String description) {
         return ResponseEntity.ok(cityService.updateCity(cityService.findCityByName(name), description));
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity delete(String name) {
+    @DeleteMapping("/delete/{name}")
+    public ResponseEntity delete(@PathVariable String name) {
         return ResponseEntity.ok(cityService.deleteCity(cityService.findCityByName(name)));
     }
 
